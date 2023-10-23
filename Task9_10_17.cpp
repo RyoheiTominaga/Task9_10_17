@@ -9,7 +9,7 @@ using namespace std;
 //使ってほしいところを使っていない恐れがあるのでご了承ください
 
 class Hero {
-public:
+private:
     string playerName;
     int playerHp;
     int playerAtk;
@@ -47,7 +47,7 @@ void Hero::heal() {
 }
 
 class Enemy {
-public:
+private:
     string enemyName;
     int enemyHp;
     int enemyAtk;
