@@ -73,7 +73,8 @@ public:
     int getter();
 };
 
-void Enemy::Show() {
+void Enemy::Show() 
+{
     cout << enemyName << endl
         << "体力:" << enemyHp << endl
         << "攻撃力:" << enemyAtk << endl
