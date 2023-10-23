@@ -39,7 +39,6 @@ void Hero::show() {
 int Hero::attack(Enemy& enemy)//attackが相互されていないエラーが発生,きえない。。(´;ω;｀)
 {
     int playerDmage = 0;
-    
     cout << playerName << "の攻撃!!" << endl;
     playerDmage = playerAtk - enemy.getter();
     return playerDmage;
