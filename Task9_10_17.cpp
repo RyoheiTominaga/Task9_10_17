@@ -7,7 +7,7 @@ using namespace std;
 
 //わからないところは調べながらやった為、
 //使ってほしいところを使っていない恐れがあるのでご了承ください
-
+class Enemy;
 class Hero {
 private:
     string playerName;
@@ -36,7 +36,7 @@ void Hero::show() {
         << "攻撃力:" << playerAtk << endl
         << "防御力:" << playerDef << endl;
 }
-int Hero::attack(Enemy& enemy)//attackが相互されていないエラーが発生,きえない。。(´;ω;｀)
+int Hero::attack(Enemy& enemy)
 {
     int playerDmage = 0;
     cout << playerName << "の攻撃!!" << endl;
