@@ -25,7 +25,8 @@ public:
     }
 
     void show();
-    void attack(Enemy& enemy);
+    int getter();
+    int attack(Enemy& enemy);
     void heal();//回復
 };
 
@@ -35,15 +36,21 @@ void Hero::show() {
         << "攻撃力:" << playerAtk << endl
         << "防御力:" << playerDef << endl;
 }
-void Hero::attack(Enemy& enemy)//attackが相互されていないエラーが発生,きえない。。(´;ω;｀)
-{    
-    cout << playerName << "の攻撃だ" << endl;
-    cout << enemy.enemyName << "に" << playerAtk - enemy.enemyDef << "のダメージ!!";
-    enemy.enemyHp -= playerAtk - enemy.enemyDef;
+int Hero::attack(Enemy& enemy)//attackが相互されていないエラーが発生,きえない。。(´;ω;｀)
+{
+    int playerDmage = 0;
+    
+    cout << playerName << "の攻撃!!" << endl;
+    playerDmage = playerAtk - enemy.getter();
+    return playerDmage;
 }
 void Hero::heal() {
     cout << playerName <<"は" << (playerDef + playerAtk) / 2 << "回復した!!";
     playerHp+=(playerDef + playerAtk) / 2;
+}
+int Hero::getter()
+{
+    return playerDef;
 }
 
 class Enemy {
@@ -62,8 +69,9 @@ public:
     {
     }
     void Show();
-    void atk(Hero& hero);
+    int atk(Hero& hero);
     void heal();
+    int getter();
 };
 
 void Enemy::Show() {
@@ -73,15 +81,21 @@ void Enemy::Show() {
         << "防御力:" << enemyDef << endl;
 }
 
-void Enemy::atk(Hero&hero) {
+int Enemy::atk(Hero&hero) 
+{
+    int enemy_dmage = 0;
+    int player_defs = 0;
     cout << enemyName << "の攻撃だ" << endl;
-    cout << hero.playerName << "に" << enemyAtk - hero.playerDef<< "のダメージ!!";
-    hero.playerHp -= enemyAtk - hero.playerDef;
+    enemy_dmage = enemyAtk - hero.getter();
 }
 
 void Enemy::heal() {
     cout << enemyName << "は" << (enemyDef + enemyAtk) / 2 << "回復した!!";
     enemyHp += (enemyDef + enemyAtk) / 2;
+}
+int Enemy::getter() //エネミーの防御力を渡す
+{
+    return enemyDef;
 }
 
 int main()
@@ -89,14 +103,15 @@ int main()
     bool victory = false;
     /*  char* name = new char[maxname];*/
     string name;
-    int hp = 0;
+    int pHp = 0;
     cout << "名前を入力して下さい" << endl;
     cin >> name;
     cout << "hpを入力しちゃって下さいよｗ\n";
-    cin >> hp;
+    cin >> pHp;
     cout << endl;
-    Hero hero(name, hp, 20, 15);
-    Enemy enemy("アルップ", 100, 150, 120);
+    Hero hero(name, pHp, 20, 15);
+    int eHp = 100;
+    Enemy enemy("アルップ", eHp, 150, 120);
     int playerMove = 0, enemyMove = 0, enemyPlus = 0;
 
     
@@ -109,12 +124,12 @@ int main()
         cin >> playerMove;
         switch (playerMove)
         {
-        case 1:hero.attack(enemy);break;
+        case 1:cout<<hero.attack(enemy)<<"ダメージを与えた‼";break;
         case 2:hero.heal();break;
         }
         srand((unsigned int)time(NULL));
         //敵のターン
-        if (enemy.enemyHp <= enemy.enemyHp * 0.7) {
+        if (eHp <= eHp* 0.7) {
             enemyPlus = 1;
         }
         else { enemyPlus = 0; }
@@ -122,11 +137,13 @@ int main()
 
         switch (enemyMove)
         {
-        case 1:enemy.atk(hero);break;
+        case 1:cout<<"プレイヤーは" << enemy.atk(hero) << "のダメージを受けた‼"; 
+            pHp -= enemy.atk(hero);
+            break;
         case 2:enemy.heal();break;
         }
 
-        if (hero.playerHp <= 0 || enemy.enemyHp <= 0) {
+        if (pHp <= 0 ||eHp <= 0) {
             victory = true;
         }
     }
