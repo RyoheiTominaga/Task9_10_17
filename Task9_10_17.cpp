@@ -101,7 +101,6 @@ int Enemy::getter() //エネミーの防御力を渡す
 int main()
 {
     bool victory = false;
-    /*  char* name = new char[maxname];*/
     string name;
     int pHp = 0;
     cout << "名前を入力して下さい" << endl;
