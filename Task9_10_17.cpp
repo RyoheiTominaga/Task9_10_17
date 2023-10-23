@@ -35,7 +35,7 @@ void Hero::show() {
         << "攻撃力:" << playerAtk << endl
         << "防御力:" << playerDef << endl;
 }
-void Hero::attack(Enemy& enemy)//attackが相互されていないエラーが発生、きえない。。(´;ω;｀)
+void Hero::attack(Enemy& enemy)//attackが相互されていないエラーが発生,きえない。。(´;ω;｀)
 {    
     cout << playerName << "の攻撃だ" << endl;
     cout << enemy.enemyName << "に" << playerAtk - enemy.enemyDef << "のダメージ!!";
