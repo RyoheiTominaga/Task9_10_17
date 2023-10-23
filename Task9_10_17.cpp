@@ -145,6 +145,8 @@ int main()
         if (pHp <= 0 ||eHp <= 0) {
             victory = true;
         }
+        Enemy enemy("アルップ", eHp, 150, 120); 
+        Hero hero(name, pHp, 20, 15);
     }
     cout << "バトル終了";
 
